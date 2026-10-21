@@ -10,7 +10,8 @@
 <p align="center">
   <a href="https://datatomcp.com">Website</a> ·
   <a href="https://app.datatomcp.com/login">Start free</a> ·
-  <a href="https://datatomcp.com/guides">Guides</a>
+  <a href="https://datatomcp.com/guides">Guides</a> ·
+  <a href="https://www.youtube.com/watch?v=uCB0uXMeoyU">40-second demo</a>
 </p>
 
 ---
