@@ -5,7 +5,7 @@
   </picture>
 </p>
 
-<p align="center"><b>Turn a CSV or Google Sheet into a remote MCP server your AI agents can query.</b></p>
+<p align="center"><b>The AI-native data layer for teams without a data team. Your team's data, ready for every AI agent.</b></p>
 
 <p align="center">
   <a href="https://datatomcp.com">Website</a> ·
@@ -20,15 +20,20 @@
 
 ---
 
-datatomcp is a hosted MCP server for your tabular data. Upload a CSV, paste a CSV link, or pick a Google Sheet. Your agent (Claude, ChatGPT, Cursor and others) can then filter, group and total the rows. The numbers are computed by a database, not estimated by the model.
+datatomcp is one governed place for a team's Google Sheets, CSV and Excel files, that every AI agent can ask. Connect your data once: datatomcp links the datasets, drafts definitions of what each number means for a person to approve, and records every question an agent asks. Agents (Claude, ChatGPT, Cursor, n8n and others) query it over MCP or REST, and a database computes the answer, so totals are exact. News: [datatomcp is now an AI-native data layer](https://datatomcp.com/news/ai-native-data-layer) (4 Nov 2026).
 
 - **Hosted.** Nothing to install or run. One URL works in every client that supports remote MCP servers.
 - **OAuth sign-in.** No API key to paste into your agent. You can revoke access at any time.
-- **Exact results.** Counts, sums and averages come from DuckDB. Every result says which version of the dataset it came from.
-- **Private Google Sheets.** You pick the sheet in Google's file picker, and datatomcp can read that file only. Pro syncs it every hour.
+- **Exact, versioned results.** Counts, sums and averages come from DuckDB. Every result names the dataset version it came from and links to the rows behind it.
+- **Shared definitions.** Approved definitions like `paid_revenue` and a glossary of your team's words. Agents use them by name, and the answer says who approved the definition.
+- **Audit trail.** Every agent question is kept: who asked, from which agent, the query, the data version. Repeated questions are compared. Export as CSV.
+- **Linked datasets.** Orders, customers and regions in one question, with unmatched rows counted.
+- **Charts.** 52 chart types from a query over REST and in the in-app assistant; in MCP clients from 7 Nov 2026.
+- **Workspaces.** Owners, editors and viewers; each agent connection can be limited to some workspaces.
+- **Private Google Sheets.** You pick the sheet in Google's file picker, and datatomcp can read that file only. Pro syncs within 5 minutes of an edit.
 - **Import report.** Bad lines, numbers stored as text and mixed date formats are reported before any agent sees the data.
 - **Read-only.** Agents can query your data, but they can't change it or run raw SQL.
-- **Hosted in the EU.** Your data is never sent to AI providers or used for training.
+- **Hosted in the EU.** Your data is never used for training. AI features inside datatomcp (cleaning suggestions, an assistant on your own key) are off until you turn them on.
 
 This repository holds the public documentation and client configuration. The service itself runs at `app.datatomcp.com`.
 
@@ -52,9 +57,9 @@ This repository holds the public documentation and client configuration. The ser
 | Tool | What it does |
 |---|---|
 | `list_datasets` | Your datasets, with row counts and freshness |
-| `describe_dataset` | Columns, types, example values, data warnings and today's date |
+| `describe_dataset` | Columns, types, example values, approved definitions, glossary, links to other datasets, data warnings and today's date |
 | `query_rows` | Filter, sort, select columns and paginate (up to 1,000 rows per call) |
-| `aggregate` | Group by columns; count, distinct count, sum, average, min and max |
+| `aggregate` | Group by columns; count, distinct count, sum, average, min and max, or a saved definition by name |
 | `distinct_values` | The real values in a column, so filters match exactly |
 
 Filters support `eq`, `neq`, `gt`, `gte`, `lt`, `lte`, `in`, `not_in`, `contains`, `starts_with`, `between`, `is_null` and `not_null`.
@@ -195,7 +200,7 @@ On our 50,000-row test sheet, it answers with 277 orders and €50,279.50 in rev
 
 ## REST API
 
-The same datasets are also available over REST with an API key, for apps and automations such as n8n or Make. See [CSV to REST API](https://datatomcp.com/guides/csv-to-rest-api).
+The same datasets, definitions and query engine are available over REST with an API key, for apps and automations such as n8n, Make or Zapier. Reference: [datatomcp.com/docs/api](https://datatomcp.com/docs/api). OpenAPI 3.1: [datatomcp.com/openapi.json](https://datatomcp.com/openapi.json).
 
 ## Plans
 
@@ -204,7 +209,9 @@ The same datasets are also available over REST with an API key, for apps and aut
 | Datasets | 3 | 25 |
 | Rows per dataset | 100,000 | 2,000,000 |
 | Queries per day | 1,000 | 50,000 |
-| Google Sheets sync | On demand | Hourly |
+| Workspaces | 1, 2 people | 3, 5 people each |
+| Audit history | 30 days | 90 days |
+| Google Sheets sync | On demand | Within 5 minutes |
 
 ## Guides
 
@@ -212,6 +219,8 @@ The same datasets are also available over REST with an API key, for apps and aut
 - [Google Sheets MCP server](https://datatomcp.com/guides/google-sheets-mcp-server)
 - [CSV MCP server](https://datatomcp.com/guides/csv-mcp-server)
 - [Analyze large CSVs with AI](https://datatomcp.com/guides/analyze-large-csv-with-ai)
+- [Shared definitions for AI agents](https://datatomcp.com/guides/shared-definitions-ai-agents)
+- [Audit what your AI agents asked](https://datatomcp.com/guides/audit-ai-agent-questions)
 
 ## Support
 
