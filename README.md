@@ -11,7 +11,7 @@
   <a href="https://datatomcp.com">Website</a> ·
   <a href="https://app.datatomcp.com/login">Start free</a> ·
   <a href="https://datatomcp.com/guides">Guides</a> ·
-  <a href="https://www.youtube.com/watch?v=6z4l6sLqcyE">Demo video</a>
+  <a href="https://www.youtube.com/watch?v=Wtt4ZplrE4I">Demo video</a>
 </p>
 
 <p align="center">
@@ -20,7 +20,7 @@
 
 ---
 
-datatomcp is one governed place for a team's Google Sheets, CSV and Excel files, that every AI agent can ask. Connect your data once: datatomcp links the datasets, drafts definitions of what each number means for a person to approve, and records every question an agent asks. Agents (Claude, ChatGPT, Cursor, n8n and others) query it over MCP or REST, and a database computes the answer, so totals are exact. News: [datatomcp is now an AI-native data layer](https://datatomcp.com/news/ai-native-data-layer) (4 Nov 2026).
+datatomcp is one governed place for a team's data, that every AI agent can ask: Google Sheets, CSV and Excel files, PostgreSQL and MySQL, Stripe, HubSpot and Airtable. Connect your data once: datatomcp links the datasets, drafts definitions of what each number means for a person to approve, and records every question an agent asks. Agents (Claude, ChatGPT, Cursor, n8n and others) query it over MCP or REST, and a database computes the answer, so totals are exact. News: [datatomcp is now an AI-native data layer](https://datatomcp.com/news/ai-native-data-layer) (4 Nov 2026).
 
 - **Hosted.** Nothing to install or run. One URL works in every client that supports remote MCP servers.
 - **OAuth sign-in.** No API key to paste into your agent. You can revoke access at any time.
@@ -28,11 +28,11 @@ datatomcp is one governed place for a team's Google Sheets, CSV and Excel files,
 - **Shared definitions.** Approved definitions like `paid_revenue` and a glossary of your team's words. Agents use them by name, and the answer says who approved the definition.
 - **Audit trail.** Every agent question is kept: who asked, from which agent, the query, the data version. Repeated questions are compared. Export as CSV.
 - **Linked datasets.** Orders, customers and regions in one question, with unmatched rows counted.
-- **Charts.** 52 chart types from a query over REST and in the in-app assistant; in MCP clients from 7 Nov 2026.
+- **Charts and dashboards.** The `chart` tool draws the answer in the chat (52 chart types, as an MCP Apps view). Agents make dashboards from your questions and refresh them later; dashboards never change your data.
 - **Workspaces.** Owners, editors and viewers; each agent connection can be limited to some workspaces.
 - **Private Google Sheets.** You pick the sheet in Google's file picker, and datatomcp can read that file only. Pro syncs within 5 minutes of an edit.
 - **Import report.** Bad lines, numbers stored as text and mixed date formats are reported before any agent sees the data.
-- **Read-only.** Agents can query your data, but they can't change it or run raw SQL.
+- **Read-only data.** Agents can query your data, but they can't change it or run raw SQL. The only tools that write create dashboards or send your team a note.
 - **Hosted in the EU.** Your data is never used for training. AI features inside datatomcp (cleaning suggestions, an assistant on your own key) are off until you turn them on.
 
 This repository holds the public documentation and client configuration. The service itself runs at `app.datatomcp.com`.
@@ -49,18 +49,24 @@ This repository holds the public documentation and client configuration. The ser
 ## Quick start
 
 1. Sign up at [app.datatomcp.com](https://app.datatomcp.com/login) (free, no card).
-2. Add a dataset: upload a CSV, paste a link, or choose a Google Sheet.
+2. Add a dataset: upload a CSV or Excel file, choose a Google Sheet, or connect PostgreSQL, MySQL, Stripe, HubSpot or Airtable. New accounts start with an example dataset.
 3. Add the server to your client (below), sign in when asked, and ask a question about your data.
 
 ## Tools
 
 | Tool | What it does |
 |---|---|
+| `workspace_overview` | Every dataset with what its columns mean, the approved definitions, the links between datasets and example questions, in one call |
 | `list_datasets` | Your datasets, with row counts and freshness |
 | `describe_dataset` | Columns, types, example values, approved definitions, glossary, links to other datasets, data warnings and today's date |
 | `query_rows` | Filter, sort, select columns and paginate (up to 1,000 rows per call) |
 | `aggregate` | Group by columns; count, distinct count, sum, average, min and max, or a saved definition by name |
 | `distinct_values` | The real values in a column, so filters match exactly |
+| `chart` | Draws a query's answer as a chart in the conversation, with the takeaway as the title |
+| `create_dashboard` | Makes a dashboard (a one-page board or a short story of slides) in your workspace |
+| `list_dashboards` | The workspace's dashboards |
+| `refresh_dashboard` | Re-runs a dashboard on the current data |
+| `report_issue` | Sends your team a note about a data problem |
 
 Filters support `eq`, `neq`, `gt`, `gte`, `lt`, `lte`, `in`, `not_in`, `contains`, `starts_with`, `between`, `is_null` and `not_null`.
 

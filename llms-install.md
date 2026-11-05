@@ -18,7 +18,7 @@ datatomcp is a **remote** MCP server. There is nothing to clone, build or run lo
    ```
 
 2. Ask the user to sign in when the browser opens. If they don't have an account yet, signing in creates one (free plan, no card).
-3. The user needs at least one dataset. If `list_datasets` returns nothing, tell them to add a CSV or Google Sheet at https://app.datatomcp.com/app/new.
+3. A new account starts with an example dataset (`sample_sales`). To use their own data, the user adds a file, a Google Sheet or a database at https://app.datatomcp.com/app/new.
 4. To confirm the setup, call `list_datasets`, then `describe_dataset` on one result.
 
-Tools: `list_datasets`, `describe_dataset`, `query_rows`, `aggregate`, `distinct_values`. All are read-only.
+Tools: `workspace_overview`, `list_datasets`, `describe_dataset`, `distinct_values`, `query_rows`, `aggregate` (read-only), `chart` (draws the answer in the chat), `create_dashboard`, `list_dashboards`, `refresh_dashboard` (dashboards, never changing data) and `report_issue`.

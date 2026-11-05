@@ -2,12 +2,12 @@
   "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
   "name": "com.datatomcp/datatomcp",
   "title": "datatomcp",
-  "description": "Query your CSVs and Google Sheets from any agent: filter, group and total with exact results.",
+  "description": "AI-native data layer: sheets, databases and apps for every agent, with exact answers and audit.",
   "repository": {
     "url": "https://github.com/datatomcp/datatomcp-mcp",
     "source": "github"
   },
-  "version": "1.0.0",
+  "version": "1.3.0",
   "websiteUrl": "https://datatomcp.com",
   "icons": [
     {
