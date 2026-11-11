@@ -20,19 +20,20 @@
 
 ---
 
-datatomcp is one governed place for a team's data, that every AI agent can ask: Google Sheets, CSV and Excel files, PostgreSQL and MySQL, Stripe, HubSpot and Airtable. Connect your data once: datatomcp links the datasets, drafts definitions of what each number means for a person to approve, and records every question an agent asks. Agents (Claude, ChatGPT, Cursor, n8n and others) query it over MCP or REST, and a database computes the answer, so totals are exact. News: [datatomcp is now an AI-native data layer](https://datatomcp.com/news/ai-native-data-layer) (4 Nov 2026).
+datatomcp is one governed place for a team's data, that every AI agent can ask: Google Sheets, CSV and Excel files, PostgreSQL and MySQL, Stripe, HubSpot and Airtable. Connect your data once. Agents do the setup work: they propose the definitions of what each number means, the links between datasets and the business brief, and a person approves them in the app. Every question an agent asks is recorded. Agents (Claude, ChatGPT, Cursor, n8n and others) query it over MCP or REST, and a database computes the answer, so totals are exact. News: [datatomcp is now an AI-native data layer](https://datatomcp.com/news/ai-native-data-layer) (4 Nov 2026).
 
 - **Hosted.** Nothing to install or run. One URL works in every client that supports remote MCP servers.
 - **OAuth sign-in.** No API key to paste into your agent. You can revoke access at any time.
 - **Exact, versioned results.** Counts, sums and averages come from DuckDB. Every result names the dataset version it came from and links to the rows behind it.
-- **Shared definitions.** Approved definitions like `paid_revenue` and a glossary of your team's words. Agents use them by name, and the answer says who approved the definition.
+- **Shared definitions.** Approved definitions like `paid_revenue` and a glossary of your team's words. For a business number, an agent first uses the approved definition and checks that it ties; when none exists, it proposes one and a person approves it. The answer says who approved the definition.
+- **Agents propose, people approve.** Definitions, links, glossary terms and the business brief that agents propose wait under To approve in the app. Only approved ones reach agents. Each agent connection is set to Build (can propose) or Analyze (reads only).
 - **Audit trail.** Every agent question is kept: who asked, from which agent, the query, the data version. Repeated questions are compared. Export as CSV.
 - **Linked datasets.** Orders, customers and regions in one question, with unmatched rows counted.
 - **Charts and dashboards.** The `chart` tool draws the answer in the chat (52 chart types, as an MCP Apps view). Agents make dashboards from your questions and refresh them later; dashboards never change your data.
 - **Workspaces.** Owners, editors and viewers; each agent connection can be limited to some workspaces.
 - **Private Google Sheets.** You pick the sheet in Google's file picker, and datatomcp can read that file only. Pro syncs within 5 minutes of an edit.
 - **Import report.** Bad lines, numbers stored as text and mixed date formats are reported before any agent sees the data.
-- **Read-only data.** Agents can query your data, but they can't change it or run raw SQL. The only tools that write create dashboards or send your team a note.
+- **Read-only data.** Agents can query your data, but they can't change it or run raw SQL. The only tools that write create dashboards, send your team a note, or propose something a person must approve.
 - **Hosted in the EU.** Your data is never used for training. AI features inside datatomcp (cleaning suggestions, an assistant on your own key) are off until you turn them on.
 
 This repository holds the public documentation and client configuration. The service itself runs at `app.datatomcp.com`.
@@ -67,6 +68,12 @@ This repository holds the public documentation and client configuration. The ser
 | `list_dashboards` | The workspace's dashboards |
 | `refresh_dashboard` | Re-runs a dashboard on the current data |
 | `report_issue` | Sends your team a note about a data problem |
+| `propose_definition` | Proposes a metric definition (e.g. revenue); it waits until an owner or editor approves it |
+| `propose_link` | Proposes a link between two datasets, checked against the data first |
+| `propose_term` | Proposes a glossary term for the team's words |
+| `propose_brief` | Proposes the workspace's business brief (what the company sells, to whom, currency, fiscal year) |
+| `connect_source` | Starts a connection to a database, app or file (imports a public link at once) |
+| `activity` | What agents asked and changed in the workspace recently |
 
 Filters support `eq`, `neq`, `gt`, `gte`, `lt`, `lte`, `in`, `not_in`, `contains`, `starts_with`, `between`, `is_null` and `not_null`.
 
